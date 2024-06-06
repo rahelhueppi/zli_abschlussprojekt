@@ -1,0 +1,18 @@
+/*Navigation*/
+#navigation {
+  display: flex;
+  justify-content: space-around; /* space between links */
+  /*padding: 0; 
+  margin: 0;*/
+  list-style-type: none; /* remove buttons */
+}
+
+/*Navigation months (showTransactions)*/
+.navImg {
+  width: 50px;
+}
+#navMonths {
+  display: flex;
+}
+
+
