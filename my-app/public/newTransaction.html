@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <title>Finance Manager - Transaktion erfassen</title>
 </head>
 <body>
@@ -33,8 +33,16 @@
     <label for="amount">Betrag</label><br>
     <input type="number" name="amount" id="amount" required>
     <br><br>
+    <label for="date">Datum der Transaktion</label><br>
+    <input type="date" name="date" id="date"> <!--default today-->
+    <br><br>
     <label for="description">Beschreibung</label><br>
     <textarea name="description" id="description"></textarea>
+    <br><br>
+    <label for="category">Kategorie</label><br>
+    <select name="category" id="category">
+      <option value="category1">Kategorie 1</option>
+    </select>
     <br><br>
     <button>Löschen</button>
     <button type="submit">Erfassen</button>
