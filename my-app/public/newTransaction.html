@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
+  <script src="js/script.js" defer></script>
   <title>Finance Manager - Transaktion erfassen</title>
 </head>
 <body>
@@ -20,32 +21,35 @@
 
   <main>
     <h1>new Transaction</h1>
+    <div id="h1_test">Hallo</div>
     <br>
-    <label for="transactionType">Art der Transaktion</label><br>
-    <select name="transactionType" id="transactionType" required>
-      <option value="intake">Einnahme</option>
-      <option value="expense">Ausgabe</option>
-    </select>
-    <br><br>
-    <label for="title">Bezeichnung</label><br>
-    <input type="text" name="title" id="title" required>
-    <br><br>
-    <label for="amount">Betrag</label><br>
-    <input type="number" name="amount" id="amount" required>
-    <br><br>
-    <label for="date">Datum der Transaktion</label><br>
-    <input type="date" name="date" id="date"> <!--default today-->
-    <br><br>
-    <label for="description">Beschreibung</label><br>
-    <textarea name="description" id="description"></textarea>
-    <br><br>
-    <label for="category">Kategorie</label><br>
-    <select name="category" id="category">
-      <option value="category1">Kategorie 1</option>
-    </select>
-    <br><br>
-    <button>Löschen</button>
-    <button type="submit">Erfassen</button>
+    <form name="newTransaction">
+      <label for="transactionType">Art der Transaktion</label><br>
+      <select name="transactionType" id="transactionType" required>
+        <option value="intake">Einnahme</option>
+        <option value="expense">Ausgabe</option>
+      </select>
+      <br><br>
+      <label for="title">Bezeichnung</label><br>
+      <input type="text" name="title" id="title" required>
+      <br><br>
+      <label for="amount">Betrag</label><br>
+      <input type="number" name="amount" id="amount" required>
+      <br><br>
+      <label for="date">Datum der Transaktion</label><br>
+      <input type="date" name="date" id="date"> <!--default today-->
+      <br><br>
+      <label for="description">Beschreibung</label><br>
+      <textarea name="description" id="description"></textarea>
+      <br><br>
+      <label for="category">Kategorie</label><br>
+      <select name="category" id="category">
+        <option value="category1">Kategorie 1</option>
+      </select>
+      <br><br>
+      <button>Löschen</button>
+      <button type="submit">Erfassen</button>
+    </form>
   </main>
   
 </body>

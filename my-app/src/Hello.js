@@ -1,7 +1,7 @@
 /*import logo from "./logo.svg";*/
 /*import "./App.css";*/
 
-function App() {
+function Hello() {
   /*return (
     <div className="App">
       <header className="App-header">
@@ -23,10 +23,10 @@ function App() {
   );*/
 
   return (
-    <div className="App">
+    <div className="Hello">
       <h1>Hello World!</h1>
     </div>
   );
 }
 
-export default App;
+export default Hello;
