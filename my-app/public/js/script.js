@@ -16,7 +16,16 @@ form.addEventListener("submit", (event) => {
   const category = formData.get("category");*/
 
   //function to make a post-request
-  postData(formData);
+  const test = {
+    transactionType: "intake",
+    title: "f",
+    amount: "5",
+    date: "2024-06-05",
+    description: "f",
+    category: "category1",
+  };
+  //postData(test);
+  getDataTest();
 
   /*only for testing if its correct, can be deleted*/
   /*alert(`Hallo 2 ${transactionType}, ${title}, ${amount}, ${date}, ${description},
@@ -26,13 +35,26 @@ form.addEventListener("submit", (event) => {
 //POST-Request
 async function postData(formData) {
   //host to send it to the backend
-  host = "http://....";
+  //host = "http://localhost:3000/newTransaction.html";
   //send a POST-Request to the backend
-  const response = await fetch(`${host}/transaction`, {
+  //`http://localhost:3001/transaction`
+  const response = await fetch(`/transaction`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(Object.fromEntries(formData)),
+    //body: JSON.stringify(Object.fromEntries(formData)),
+    body: formData,
   });
+}
+
+//GET-Request (test) (kann gelöscht werden)
+async function getDataTest() {
+  let testData;
+
+  await fetch(`/getTransactions`)
+    .then((res) => res.json())
+    .then((data) => (testData = data));
+
+  alert(testData.title);
 }
