@@ -5,34 +5,28 @@ const swaggerAutogen = require("swagger-autogen");
 const swaggerUi = require("swagger-ui-express");
 
 const app = express();
-app.use(cors());
 
-/*Swagger funktioniert noch nicht*/
+//### Middlewares
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+//JSON middleware enables sending JSON data to endpoints, making them accessible as js objects.
+app.use(express.json());
+
+//### Swagger doesn't work
 swaggerAutogen("./swagger_output.json", ["./server.js"]);
 app.use("/swagger-ui", swaggerUi.serve, swaggerUi.setup(swaggerAutogen));
+//swagger bis hier
 
+//### Post-Request, to save a new transaction
 app.post("/transaction", (request, response) => {
-  //const { transactionType } = request.body;
   if (request.body) {
     response.status(201).send(request.body);
-    //response.json({msg: "Hello"})
   } else {
     response.status(400).send({ error: "Bad Request" });
   }
 });
 
-//Test, ob Frontend mit Backend kommuniziert (kann gelöscht werden)
-const testGet = {
-  transactionType: "intake",
-  title: "test",
-};
-
-app.get("/getTransactions", (request, response) => {
-  response.status(200).send(testGet);
-});
-//bis hier Test
-
-// Server
+//### Server
 app.listen(3001, () => {
   console.log(`listening on port 3001`);
 });
