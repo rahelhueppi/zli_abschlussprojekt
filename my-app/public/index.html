@@ -3,9 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="stylesheet" href="/css/style.css">
     <title>Finance Manager</title>
+    <script>
+      //If you're logged in, you stay on index.html 
+      //or else you will be redirected to login.html
+      function verify() {
+        fetch(`http://localhost:3001/verify`, {
+          method: "GET",
+        })
+          .then((response) => {
+            alert(response.status);
+            if (response.status == 401) {
+              window.location.href = "login.html";
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      verify();
+
+
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -20,7 +41,8 @@
         </ul>
       </nav>
     </header>
-  
+    <li><a href="login.html">Login</a></li>
+    <li><a href="register.html">Register</a></li>
     <main>
       <p>Hello {User}</p>
       <div id="root"></div>
