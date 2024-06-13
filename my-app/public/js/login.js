@@ -20,7 +20,7 @@ form.addEventListener("submit", async (event) => {
     body: JSON.stringify(Object.fromEntries(formData)),
   });
 
-  alert(response.status);
+  alert(`${response.status}`);
 
   //redirect to webapp, if logged in correctly
   if (response.status == 200) {

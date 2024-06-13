@@ -8,7 +8,8 @@
     <script>
       //If you're logged in, you stay on index.html 
       //or else you will be redirected to login.html
-      function verify() {
+
+      //function verify() {
         fetch(`http://localhost:3001/verify`, {
           method: "GET",
         })
@@ -19,11 +20,13 @@
             }
           })
           .catch((error) => {
+            alert("Hallo")
             console.error("Error:", error);
           });
-      }
+      //}
 
-      verify();
+      //verify();
+
 
 
     </script>

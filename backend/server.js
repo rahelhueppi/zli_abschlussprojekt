@@ -1,3 +1,9 @@
+/*
+Durch das Modul nodemon wird das Programm bei jeder Dateiänderung neu gestartet, ohne dass man es manuell starten muss. Dieses Modul wird so installiert und gestartet:
+Npm install -g nodemon
+Nodemon filename.js
+*/
+
 const express = require("express"); // npm install express
 const cors = require("cors"); //Um CORS-Probleme zu verhindern
 //const authenticationRouter = require("./authentication.js");
@@ -113,29 +119,33 @@ app.post("/register", (request, response) => {
 });
 
 //### Post-Request, to log in
+
 app.post("/login", (request, response) => {
   let { loginEmail, loginPassword } = request.body;
   //hash password
-  /*
-  loginPassword = crypto.createHash("sha1").update(loginPassword).digest("hex");
 
+  loginPassword = crypto.createHash("sha1").update(loginPassword).digest("hex");
+  let resultSelect = [];
   //get password of the email
   con.query(
-    `SELECT password FROM customer WHERE email="${loginEmail}"`,
-    function (err, result) {
+    `SELECT password FROM person WHERE email="${loginEmail}"`,
+    function (err, resultSelect) {
       if (err) throw err;
-      console.log(resultSelect);
+      //console.log(`DB: ${resultSelect[0].password}`);
+      //console.log(`login: ${loginPassword}`);
+
+      if (loginPassword === `${resultSelect[0].password}`) {
+        request.session.email = loginEmail;
+        return response.status(200).json({ email: request.session.email });
+      }
+      return response.status(401).json({ error: "Invalid credentials" });
     }
-  );*/
-  if (loginEmail !== undefined && loginPassword == `m295`) {
-    request.session.email = loginEmail;
-    return response.status(200).json({ email: request.session.email });
-  }
-  return response.status(401).json({ error: "Invalid credentials" });
+  );
 });
 
 //### verify, if a user is logged in
 app.get("/verify", (request, response) => {
+  console.log(request);
   if (request.session.email) {
     return response.status(200).json({ email: request.session.email });
   }
