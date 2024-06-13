@@ -1,4 +1,4 @@
-/*Javascript for transmitting the form data to backend*/
+/*Javascript for transmitting the login form data to backend*/
 
 const form = document.forms.login;
 let response;
@@ -20,9 +20,10 @@ form.addEventListener("submit", async (event) => {
     body: JSON.stringify(Object.fromEntries(formData)),
   });
 
-  alert(`${response.status}`);
+  //const responseData = await response.json();
+  //const idPerson = responseData.idPerson;
 
-  //redirect to webapp, if logged in correctly
+  //### redirect to webapp, if logged in correctly
   if (response.status == 200) {
     alert("Logininformationen korrekt");
     window.location.href = "index.html";
@@ -30,3 +31,5 @@ form.addEventListener("submit", async (event) => {
     alert("E-Mail oder Passwort falsch");
   }
 });
+
+//export { idPerson };

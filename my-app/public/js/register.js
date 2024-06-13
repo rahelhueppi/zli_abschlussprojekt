@@ -1,4 +1,4 @@
-/*Javascript for transmitting the form data to backend*/
+/*Javascript for transmitting the register form data to backend*/
 
 const form = document.forms.register;
 

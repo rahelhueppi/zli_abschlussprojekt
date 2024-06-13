@@ -26,23 +26,11 @@ con.connect((err) => {
   console.log("Connected with database");
 });
 
-/*
-con.connect(function (err) {
+/*con.connect(function (err) {
   if (err) throw err;
   con.query("SELECT * FROM category", function (err, result, fields) {
     if (err) throw err;
-    console.log(result);
-  });
-});*/
-
-/*
-con.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected!");
-  var sql = "INSERT INTO category (name) VALUES ('categoryFromJS')";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("1 record inserted");
+    return result;
   });
 });*/
 
@@ -77,24 +65,49 @@ app.use("/swagger-ui", swaggerUi.serve, swaggerUi.setup(swaggerAutogen));
 app.post("/transaction", (request, response) => {
   let { transactionType, title, amount, date, description, category } =
     request.body;
-  if (request.body) {
-    response.status(201).send(request.body);
-    //insert data into database
-    //noch person einfügen
-    var sql = `INSERT INTO transaction (transactionType, title, amount, date, description, Person_idPerson, Category_idCategory) 
-      VALUES ('${transactionType}', '${title}', '${amount}', '${date}', '${description}', '1', '${category}')`;
-    con.query(sql, function (err, result) {
+
+  //get the persons ID
+  con.query(
+    `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+    function (err, result) {
       if (err) throw err;
-      console.log("1 transaction inserted");
-    });
-  } else {
-    response.status(400).send({ error: "Bad Request" });
-  }
+      let idPersonTransaction = result[0].idPerson; // extract id out of the result
+
+      if (idPersonTransaction !== undefined) {
+        //insert data into database
+        var sql = `INSERT INTO transaction (transactionType, title, amount, date, description, Person_idPerson, Category_idCategory) 
+          VALUES (?,?,?,?,?,?,?)`; // ? = placeholder
+        con.query(
+          sql,
+          //fill placeholder
+          [
+            transactionType,
+            title,
+            amount,
+            date,
+            description,
+            idPersonTransaction,
+            category,
+          ],
+          function (err, result) {
+            if (err) throw err;
+            console.log("1 transaction inserted");
+            response
+              .status(201)
+              .send({ message: "Transaction successfully added" });
+          }
+        );
+      } else {
+        // throw error if the user was not found
+        response.status(404).send({ error: "User not found" });
+      }
+    }
+  );
 });
 
 //##### Authentication
 
-//### Post-Request, to save a person
+//### Post-Request to save a person
 app.post("/register", (request, response) => {
   let { registerEmail, registerPassword } = request.body;
   if (request.body) {
@@ -122,21 +135,23 @@ app.post("/register", (request, response) => {
 
 app.post("/login", (request, response) => {
   let { loginEmail, loginPassword } = request.body;
-  //hash password
 
+  //hash password
   loginPassword = crypto.createHash("sha1").update(loginPassword).digest("hex");
-  let resultSelect = [];
   //get password of the email
   con.query(
-    `SELECT password FROM person WHERE email="${loginEmail}"`,
+    `SELECT password, idPerson FROM person WHERE email="${loginEmail}"`,
     function (err, resultSelect) {
       if (err) throw err;
       //console.log(`DB: ${resultSelect[0].password}`);
       //console.log(`login: ${loginPassword}`);
+      const idPerson = resultSelect[0].idPerson;
 
       if (loginPassword === `${resultSelect[0].password}`) {
         request.session.email = loginEmail;
-        return response.status(200).json({ email: request.session.email });
+        return response
+          .status(200)
+          .json({ email: request.session.email, idPerson: idPerson });
       }
       return response.status(401).json({ error: "Invalid credentials" });
     }
@@ -145,7 +160,6 @@ app.post("/login", (request, response) => {
 
 //### verify, if a user is logged in
 app.get("/verify", (request, response) => {
-  console.log(request);
   if (request.session.email) {
     return response.status(200).json({ email: request.session.email });
   }
