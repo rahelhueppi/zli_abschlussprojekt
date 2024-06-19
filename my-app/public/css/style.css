@@ -1,10 +1,11 @@
+/*CSS for Navigation and Index.html*/
 /*####### Navigation ########*/
 #navigation {
   display: flex;
   justify-content: space-around; /* space between links */
+  list-style-type: none; /* remove buttons */
   /*padding: 0; 
   margin: 0;*/
-  list-style-type: none; /* remove buttons */
 }
 
 /*Navigation months (showTransactions)*/
@@ -21,7 +22,7 @@ nav {
   border-bottom: 1px solid #ccc; /* line (separate nav from main)*/
 }
 
-#navigation a {
+nav a {
   text-decoration: none; /*removes underline*/
   color: black; /* textcolor */
   font-size: 1.5rem;
@@ -40,8 +41,18 @@ nav {
   border-bottom: 1px solid #ffffff; /* line (separate nav from main)*/
 }
 
+/*footer*/
 
-/*######## main #####*/
+.footer{
+  list-style-type: none;
+}
+
+.footer a {
+  font-size: 0.9rem;
+}
+
+
+/*######## main #######*/
 
 main {
   flex-grow: 1;
@@ -50,6 +61,10 @@ main {
 
 body{
   margin: 0;
+}
+
+#helloMessage {
+  font-size: 1.5rem;
 }
 
 

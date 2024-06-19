@@ -53,16 +53,6 @@
         }
       }
     },
-    "/username": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/register": {
       "post": {
         "description": "",
@@ -89,6 +79,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
           }
         }
       }

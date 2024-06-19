@@ -100,25 +100,43 @@ app.post("/transaction", (request, response) => {
 //##### Authentication
 
 //### Post-Request to save a person
-app.post("/register", (request, response) => {
-  let { registerEmail, registerPassword } = request.body;
-  if (request.body) {
-    response.status(201).send(request.body);
+app.post("/register", async (request, response) => {
+  try {
+    let { registerEmail, registerPassword } = request.body;
 
-    //hash password
-    hashPassword = crypto
+    // Check if the username is already registered
+    const existingUser = await new Promise((resolve, reject) => {
+      con.query(
+        `SELECT * FROM person WHERE email =?`,
+        [registerEmail],
+        (err, result) => {
+          if (err) reject(err);
+          resolve(result.length > 0); // Returns true if email exists
+        }
+      );
+    });
+
+    if (existingUser) {
+      // Email already exists, send error response
+      return response.status(409).send({ error: "Email already in use" });
+    }
+
+    // Hash password
+    const hashPassword = crypto
       .createHash("sha1")
       .update(registerPassword)
       .digest("hex");
 
-    //insert data into database
+    // Insert data into database
     var sql = `INSERT INTO person (email, password) 
       VALUES ('${registerEmail}', '${hashPassword}')`;
     con.query(sql, function (err, result) {
       if (err) throw err;
       console.log(`1 person inserted`);
     });
-  } else {
+    response.status(201).send({ message: "Registration successful" });
+  } catch (error) {
+    console.error(error);
     response.status(400).send({ error: "Bad Request" });
   }
 });

@@ -1,0 +1,15 @@
+/*CSS for the HTML-Page "newTransaction.html*/
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divForm {
+  width: 45%; /* with of the form-container */
+  max-width: 600px; 
+  /*background-color: white; /* Weißer Hintergrund für das Formular */
+  padding: 30px; /* Abstand innerhalb des Formularcontainers */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: Umriss um das Formular */
+}

@@ -4,74 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/newTransaction.css" />
     <script src="js/script.js" defer></script>
     <title>Finance Manager - Transaktion erfassen</title>
   </head>
   <body>
     <header>
       <!--Navigation-->
-      <nav>
+      <nav class="headerFooter">
         <ul id="navigation">
           <li><a href="index.html">Home</a></li>
           <li class="current">
             <a href="newTransaction.html">Transaktion erfassen</a>
           </li>
           <li><a href="showTransactions.html">Transaktionen</a></li>
-          <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <h1>new Transaction</h1>
-      <div id="h1_test">Hallo</div>
-      <br />
-      <form name="newTransaction">
-        <label for="transactionType">Art der Transaktion</label><br />
-        <select name="transactionType" id="transactionType" required>
-          <option value="intake">Einnahme</option>
-          <option value="expense">Ausgabe</option>
-        </select>
-        <br /><br />
-        <label for="title">Bezeichnung</label><br />
-        <input type="text" name="title" id="title" required />
-        <br /><br />
-        <label for="amount">Betrag</label><br />
-        <input type="number" name="amount" id="amount" required />
-        <br /><br />
-        <label for="date">Datum der Transaktion</label><br />
-        <input type="date" name="date" id="date" required />
-        <!--default today-->
-        <br /><br />
-        <label for="description">Beschreibung</label><br />
-        <textarea name="description" id="description"></textarea>
-        <br /><br />
-        <label for="category">Kategorie</label><br />
-        <select name="category" id="category" required>
-          <!--Einnahmen (noch trennen)-->
-          <option class="intake" value="1">Lohn</option>
-          <option class="intake" value="2">Geschenk (Einnahme)</option>
-          <option class="intake" value="3">Verkauf</option>
-          <option class="intake" value="4">Rückzahlung</option>
-          <option class="intake" value="5">Sonstiges (Einnahme)</option>
-          <!--Ausgaben-->
-          <option class="expense" value="6">Wohnen</option>
-          <option class="expense" value="7">Gesundheit</option>
-          <option class="expense" value="8">Hobbys/Freizeit/Sport</option>
-          <option class="expense" value="9">Bildung</option>
-          <option class="expense" value="10">Tierhaltung</option>
-          <option class="expense" value="11">Kleidung</option>
-          <option class="expense" value="12">Nahrung</option>
-          <option class="expense" value="13">Geschenk (Ausgabe)</option>
-          <option class="expense" value="14">Versicherung/Steuern</option>
-          <option class="expense" value="15">Elektronik</option>
-          <option class="expense" value="16">Transport</option>
-          <option class="expense" value="17">Sonstiges (Ausgabe)</option>
-        </select>
-        <br /><br />
-        <button>Löschen</button>
-        <button type="submit">Erfassen</button>
-      </form>
+      <div class="divForm">
+        <h2>Transaktion hinzufügen</h2>
+        <form name="newTransaction">
+          <label for="transactionType">Art der Transaktion</label><br />
+          <select name="transactionType" id="transactionType" required>
+            <option value="intake">Einnahme</option>
+            <option value="expense">Ausgabe</option>
+          </select>
+          <br /><br />
+          <label for="title">Bezeichnung</label><br />
+          <input type="text" name="title" id="title" required />
+          <br /><br />
+          <label for="amount">Betrag</label><br />
+          <input type="number" name="amount" id="amount" required />
+          <br /><br />
+          <label for="date">Datum der Transaktion</label><br />
+          <input type="date" name="date" id="date" required />
+          <!--default today-->
+          <br /><br />
+          <label for="description">Beschreibung</label><br />
+          <textarea name="description" id="description"></textarea>
+          <br /><br />
+          <label for="category">Kategorie</label><br />
+          <select name="category" id="category" required>
+            <!--Einnahmen (noch trennen)-->
+            <option class="intake" value="1">Lohn</option>
+            <option class="intake" value="2">Geschenk (Einnahme)</option>
+            <option class="intake" value="3">Verkauf</option>
+            <option class="intake" value="4">Rückzahlung</option>
+            <option class="intake" value="5">Sonstiges (Einnahme)</option>
+            <!--Ausgaben-->
+            <option class="expense" value="6">Wohnen</option>
+            <option class="expense" value="7">Gesundheit</option>
+            <option class="expense" value="8">Hobbys/Freizeit/Sport</option>
+            <option class="expense" value="9">Bildung</option>
+            <option class="expense" value="10">Tierhaltung</option>
+            <option class="expense" value="11">Kleidung</option>
+            <option class="expense" value="12">Nahrung</option>
+            <option class="expense" value="13">Geschenk (Ausgabe)</option>
+            <option class="expense" value="14">Versicherung/Steuern</option>
+            <option class="expense" value="15">Elektronik</option>
+            <option class="expense" value="16">Transport</option>
+            <option class="expense" value="17">Sonstiges (Ausgabe)</option>
+          </select>
+          <br /><br />
+          <button>Löschen</button>
+          <button type="submit">Erfassen</button>
+        </form>
+      </div>
     </main>
   </body>
+  <footer class="footer">
+    <nav class="headerFooter">
+      <li><a href="login.html">Login</a></li>
+      <li><a href="register.html">Registrieren</a></li>
+    </nav>
+  </footer>
 </html>
