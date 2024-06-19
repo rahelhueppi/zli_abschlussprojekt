@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/register.js" defer></script>
-  <title>Login</title>
-</head>
-<body>
-  <h1>Registrieren</h1>
-  <form name="register">
-    <label for="registerEmail">E-Mail-Adresse</label><br>
-    <input type="email" name="registerEmail" id="registerEmail" required><br>
-    <br>
-    <label for="registerPassword">Passwort</label><br>
-    <input type="password" name="registerPassword" id="registerPassword" required><br>
-    <br>
-    <label for="registerConfirmPassword">Passwort bestätigen</label><br>
-    <input type="password" name="registerConfirmPassword" id="registerConfirmPassword" required><br>
-    <br><br>
-    <button type="submit">Registrieren</button>
-  </form>
-  <br>
-  <a href="login.html">Sie haben bereits Konto?</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/register.js" defer></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Registrieren</h1>
+    <form name="register">
+      <label for="registerEmail">Benutzername</label><br />
+      <input
+        type="text"
+        name="registerEmail"
+        id="registerEmail"
+        required
+      /><br />
+      <br />
+      <label for="registerPassword">Passwort</label><br />
+      <input
+        type="password"
+        name="registerPassword"
+        id="registerPassword"
+        required
+        minlength="8"
+      /><br />
+      <br />
+      <label for="registerConfirmPassword">Passwort bestätigen</label><br />
+      <input
+        type="password"
+        name="registerConfirmPassword"
+        id="registerConfirmPassword"
+        required
+        minlength="8"
+      /><br />
+      <br /><br />
+      <button type="submit">Registrieren</button>
+    </form>
+    <br />
+    <a href="login.html">Sie haben bereits Konto?</a>
+  </body>
 </html>

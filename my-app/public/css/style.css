@@ -1,4 +1,4 @@
-/*Navigation*/
+/*####### Navigation ########*/
 #navigation {
   display: flex;
   justify-content: space-around; /* space between links */
@@ -15,5 +15,41 @@
   display: flex;
 }
 
+nav {
+  background-color: #f0f0f0; 
+  padding: 20px;
+  border-bottom: 1px solid #ccc; /* line (separate nav from main)*/
+}
+
+#navigation a {
+  text-decoration: none; /*removes underline*/
+  color: black; /* textcolor */
+  font-size: 1.5rem;
+}
+
+.current {
+  text-decoration: underline;
+  background-color: #d7d5d5;
+}
+
+
+/*navigation for months*/
+#navMonths {
+  background-color: #fbfbfb; 
+  padding: 20px;
+  border-bottom: 1px solid #ffffff; /* line (separate nav from main)*/
+}
+
+
+/*######## main #####*/
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+body{
+  margin: 0;
+}
 
 

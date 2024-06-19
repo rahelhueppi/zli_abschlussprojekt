@@ -3,27 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Finance Manager</title>
     <script>
-      //If you're logged in, you stay on index.html 
+      //If you're logged in, you stay on index.html
       //or else you will be redirected to login.html
-
       fetch(`/verify`, {
         method: "GET",
       })
         .then((response) => {
-          alert(response.status);
+          /*alert(response.status);*/
           if (response.status == 401) {
             window.location.href = "login.html";
           }
+          return response.text(); //get body as string
+        })
+        .then((body) => {
+          //convert string in JSON-object
+          const data = JSON.parse(body);
+
+          //fill the hello-message with the username
+          const helloMessage = document.getElementById("helloMessage");
+          helloMessage.innerText = `Hello ${data.email}`;
         })
         .catch((error) => {
-          alert("Hallo")
           console.error("Error:", error);
         });
-
-
     </script>
   </head>
   <body>
@@ -36,16 +41,13 @@
           <li class="current"><a href="index.html">Home</a></li>
           <li><a href="newTransaction.html">Transaktion erfassen</a></li>
           <li><a href="showTransactions.html">Transaktionen</a></li>
+          <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
     </header>
-    <li><a href="login.html">Login</a></li>
-    <li><a href="register.html">Register</a></li>
     <main>
-      <p>Hello {User}</p>
+      <p id="helloMessage">Hello</p>
       <div id="root"></div>
-
     </main>
-    
   </body>
 </html>

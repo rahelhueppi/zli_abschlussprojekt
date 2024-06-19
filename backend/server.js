@@ -26,14 +26,6 @@ con.connect((err) => {
   console.log("Connected with database");
 });
 
-/*con.connect(function (err) {
-  if (err) throw err;
-  con.query("SELECT * FROM category", function (err, result, fields) {
-    if (err) throw err;
-    return result;
-  });
-});*/
-
 const swaggerAutogen = require("swagger-autogen");
 const swaggerUi = require("swagger-ui-express");
 
