@@ -1,7 +1,4 @@
-/*Javascript for transmitting the form data to backend*/
-
-//import the id
-//import { idPerson } from "./login.js";
+/*Javascript for transmitting the form data to backend (from newTransaction.html)*/
 
 const form = document.forms.newTransaction;
 
@@ -9,9 +6,6 @@ const form = document.forms.newTransaction;
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(form);
-  idPerson = 2;
-
-  formData.idPerson = idPerson;
 
   //call function to make a post-request
   postData(formData);

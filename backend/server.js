@@ -26,9 +26,6 @@ con.connect((err) => {
   console.log("Connected with database");
 });
 
-const swaggerAutogen = require("swagger-autogen");
-const swaggerUi = require("swagger-ui-express");
-
 const app = express();
 
 //### Middlewares
@@ -44,11 +41,6 @@ app.use(
     cookie: {},
   })
 );
-
-//### Swagger doesn't work
-swaggerAutogen("./swagger_output.json", ["./server.js"]);
-app.use("/swagger-ui", swaggerUi.serve, swaggerUi.setup(swaggerAutogen));
-//swagger bis hier
 
 //connect with file authentication.js
 //app.use("/authentication", authenticationRouter);
@@ -97,7 +89,36 @@ app.post("/transaction", (request, response) => {
   );
 });
 
-//##### Authentication
+//#### Get-Request to get all transactions*
+app.get("/transactions", async (request, response) => {
+  try {
+    //get the persons ID
+    con.query(
+      `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+      function (err, result) {
+        if (err) throw err;
+        let idPerson = result[0].idPerson; // extract id out of the result
+
+        if (idPerson !== undefined) {
+          //search all transactions from this person
+          con.query(
+            `SELECT * FROM transaction WHERE Person_idPerson = ${idPerson}`,
+            (err, result) => {
+              //send result/transactions
+              response.status(200).send(result);
+            }
+          );
+        } else {
+          response.status(404).send({ error: "User not found" });
+        }
+      }
+    );
+  } catch (error) {
+    response.status(404).send({ error: "Not found" });
+  }
+});
+
+//######### Authentication ###############
 
 //### Post-Request to save a person
 app.post("/register", async (request, response) => {

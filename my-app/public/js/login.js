@@ -8,9 +8,6 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(form);
 
-  const email = formData.get("loginEmail");
-  const password = formData.get("loginPassword");
-
   //send a POST-Request to the backend
   response = await fetch(`/login`, {
     method: "POST",
@@ -20,9 +17,6 @@ form.addEventListener("submit", async (event) => {
     body: JSON.stringify(Object.fromEntries(formData)),
   });
 
-  //const responseData = await response.json();
-  //const idPerson = responseData.idPerson;
-
   //### redirect to webapp, if logged in correctly
   if (response.status == 200) {
     alert("Logininformationen korrekt");
@@ -31,5 +25,3 @@ form.addEventListener("submit", async (event) => {
     alert("E-Mail oder Passwort falsch");
   }
 });
-
-//export { idPerson };
