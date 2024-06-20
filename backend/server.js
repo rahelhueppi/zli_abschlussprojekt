@@ -1,7 +1,9 @@
 /*
-Durch das Modul nodemon wird das Programm bei jeder Dateiänderung neu gestartet, ohne dass man es manuell starten muss. Dieses Modul wird so installiert und gestartet:
-Npm install -g nodemon
-Nodemon filename.js
+# author: Rahel Hüppi
+# version: 1.0
+# date: 20.06.2024
+# description: To process the requests 
+# and/or communicate with the database.
 */
 
 const express = require("express"); // npm install express
@@ -20,7 +22,7 @@ var con = mysql.createConnection({
   database: "financemanager",
 });
 
-//connect once (or else it will trow an error)
+//connect once
 con.connect((err) => {
   if (err) throw err;
   console.log("Connected with database");
@@ -89,7 +91,7 @@ app.post("/transaction", (request, response) => {
   );
 });
 
-//#### Get-Request to get all transactions*
+//#### Get-Request to get all transactions
 app.get("/transactions", async (request, response) => {
   const month = request.query.month;
   const year = request.query.year;
@@ -177,10 +179,9 @@ app.post("/login", (request, response) => {
     `SELECT password, idPerson FROM person WHERE email="${loginEmail}"`,
     function (err, resultSelect) {
       if (err) throw err;
-      //console.log(`DB: ${resultSelect[0].password}`);
-      //console.log(`login: ${loginPassword}`);
       const idPerson = resultSelect[0].idPerson;
 
+      // compare entered password with pw in db
       if (loginPassword === `${resultSelect[0].password}`) {
         request.session.email = loginEmail;
         return response

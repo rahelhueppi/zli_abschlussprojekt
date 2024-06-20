@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="/css/newTransaction.css" />
     <script src="js/newTransaction.js" defer></script>
     <title>Finance Manager - Transaktion erfassen</title>
+    <script>
+      //If you're logged in, you stay on index.html
+      //or else you will be redirected to login.html
+      fetch(`/verify`, {
+        method: "GET",
+      })
+        .then((response) => {
+          /*alert(response.status);*/
+          if (response.status == 401) {
+            window.location.href = "login.html";
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    </script>
   </head>
   <body>
     <header>

@@ -1,4 +1,10 @@
-/*Javascript for transmitting the login form data to backend*/
+/*
+# author: Rahel Hüppi
+# version: 1.0
+# date: 20.06.2024
+# description: For transmitting the 
+login form data to backend
+*/
 
 const form = document.forms.login;
 let response;

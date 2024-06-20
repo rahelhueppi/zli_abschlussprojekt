@@ -1,3 +1,9 @@
+/*
+# author: Rahel Hüppi
+# version: 1.1
+# date: 20.06.2024
+# description: To register. Validation for the Inputs.
+*/
 const form = document.forms.register;
 const buttonSubmit = document.getElementById("submit");
 

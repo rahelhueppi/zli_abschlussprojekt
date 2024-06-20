@@ -6,7 +6,23 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/showTransaction.css" />
     <script src="js/showTransactions.js" defer></script>
-    <title>Finance Manager</title>
+    <title>Finance Manager - Transaktionen anzeigen</title>
+    <script>
+      //If you're logged in, you stay on index.html
+      //or else you will be redirected to login.html
+      fetch(`/verify`, {
+        method: "GET",
+      })
+        .then((response) => {
+          /*alert(response.status);*/
+          if (response.status == 401) {
+            window.location.href = "login.html";
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    </script>
   </head>
   <body>
     <header>
@@ -24,28 +40,26 @@
 
     <main>
       <h1>Transaktionen</h1>
+      <!--show currentMonth-->
       <h3 id="currentMonth"></h3>
 
+      <!--Nav between months-->
       <nav id="navMonths">
-        <div class="arrow">
-          <a href="showTransactions.html"
-            ><img src="images/arrow_back_black.png" class="navImg"
-          /></a>
+        <div class="arrow" id="arrowBack">
+          <img src="images/arrow_back_black.png" class="navImg" />
         </div>
-        <div class="overview">
-          <a href="showTransactions.html"
-            ><img src="images/hamburger_black.png" class="navImg"
-          /></a>
+        <div class="divCurrentMonth" id="divCurrentMonth">
+          <img src="images/hamburger_black.png" class="navImg" />
         </div>
-        <div class="arrow">
-          <a href="showTransactions.html"
-            ><img src="images/arrow_next_black.png" class="navImg"
-          /></a>
+        <div class="arrow" id="arrowNext">
+          <img src="images/arrow_next_black.png" class="navImg" />
         </div>
       </nav>
+      <!--show all Transactions of the selected month-->
       <div id="showTransactions"></div>
     </main>
   </body>
+  <!--footer-->
   <footer class="footer">
     <nav class="headerFooter">
       <li><a href="login.html">Login</a></li>

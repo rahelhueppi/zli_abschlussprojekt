@@ -1,4 +1,10 @@
-/*Javascript for transmitting the form data to backend (from newTransaction.html)*/
+/*
+# author: Rahel Hüppi
+# version: 1.0
+# date: 20.06.2024
+# description: For transmitting the 
+# form data (new Transaction) to the backend 
+*/
 
 const form = document.forms.newTransaction;
 
