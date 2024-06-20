@@ -42,7 +42,7 @@ nav a {
 #navMonths {
   background-color: #fbfbfb; 
   padding: 20px;
-  border-bottom: 1px solid #ffffff; /* line (separate nav from main)*/
+  border: 1px solid #ffffff; /* line (separate nav from main)*/
 }
 
 /*footer*/

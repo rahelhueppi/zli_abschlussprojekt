@@ -1,16 +1,16 @@
 const form = document.forms.register;
+const buttonSubmit = document.getElementById("submit");
 
-//### Event-Listener on Form
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const formData = new FormData(form);
+  //const formData = new FormData(form);
 
-  checkPasswords(formData);
+  checkPasswords();
 
   // Call function to make a POST-Request
-  const response = await postData(formData);
+  /*const response = await postData(formData);
 
-  checkEmail(response);
+  checkEmail(response);*/
 });
 
 //### Function to make POST-Request
@@ -26,48 +26,60 @@ async function postData(formData) {
   return response; // Return the response object for further use
 }
 
-function checkPasswords(formData) {
+//### Function to check, if the passwords match
+async function checkPasswords() {
+  let newForm = document.forms.register;
+  const formData = new FormData(newForm);
   const password = formData.get("registerPassword");
   const passwordConfirmation = formData.get("registerConfirmPassword");
 
   // Check if both passwords are the same
   const inputConfirmation = document.getElementById("registerConfirmPassword");
   if (password !== passwordConfirmation) {
+    // Passwords do not match
     inputConfirmation.setCustomValidity("Passwort stimmt nicht überein.");
+    //wait for change
+    document
+      .querySelectorAll(
+        'input[name="registerPassword"], input[name="registerConfirmPassword"]'
+      )
+      .forEach((input) => {
+        input.addEventListener("change", () => {
+          // check passwords everytime something changes
+          newForm = document.forms.register;
+          checkPasswords(new FormData(form));
+        });
+      });
   } else {
+    // Passwords match
     inputConfirmation.setCustomValidity(""); // Clear validity if passwords match
+    // check, if the email is avaiable
+    checkEmail(formData);
   }
 }
 
-function checkEmail(response) {
+//### Function to check if the username is already in use
+async function checkEmail(formData) {
+  newForm = document.forms.register;
+  // check, if the email is avaiable
+  const response = await postData(formData);
   const email = document.getElementById("registerEmail");
   if (response.status == 409) {
     email.setCustomValidity("Benutzername ist bereits vergeben");
+    // Event Listener for Changes in Email-Input-Field
+    document
+      .querySelector('input[name="registerEmail"]')
+      .addEventListener("change", async () => {
+        // Create a new FormData instance and send a POST request
+        /*const newFormData = new FormData(form);
+          const response = await postData(newFormData);*/
+
+        // Check the email every time it changes
+        //submit(newForm); //eventListener in function submit
+        checkPasswords();
+      });
   } else {
     email.setCustomValidity("");
+    window.location.href = "login.html";
   }
 }
-
-// Event Listener for Changes in Password-Input-Fields
-document
-  .querySelectorAll(
-    'input[name="registerPassword"], input[name="registerConfirmPassword"]'
-  )
-  .forEach((input) => {
-    input.addEventListener("change", () => {
-      // check passwords everytime something changes
-      checkPasswords(new FormData(form));
-    });
-  });
-
-// Event Listener for Changes in Email-Input-Field
-document
-  .querySelector('input[name="registerEmail"]')
-  .addEventListener("change", async () => {
-    // Create a new FormData instance and send a POST request
-    const newFormData = new FormData(form);
-    const response = await postData(newFormData);
-
-    // Check the email every time it changes
-    checkEmail(response);
-  });

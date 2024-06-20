@@ -140,22 +140,22 @@ app.post("/register", async (request, response) => {
     if (existingUser) {
       // Email already exists, send error response
       return response.status(409).send({ error: "Email already in use" });
+    } else {
+      // Hash password
+      const hashPassword = crypto
+        .createHash("sha1")
+        .update(registerPassword)
+        .digest("hex");
+
+      // Insert data into database
+      var sql = `INSERT INTO person (email, password) 
+    VALUES ('${registerEmail}', '${hashPassword}')`;
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(`1 person inserted`);
+      });
+      response.status(201).send({ message: "Registration successful" });
     }
-
-    // Hash password
-    const hashPassword = crypto
-      .createHash("sha1")
-      .update(registerPassword)
-      .digest("hex");
-
-    // Insert data into database
-    var sql = `INSERT INTO person (email, password) 
-      VALUES ('${registerEmail}', '${hashPassword}')`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log(`1 person inserted`);
-    });
-    response.status(201).send({ message: "Registration successful" });
   } catch (error) {
     console.error(error);
     response.status(400).send({ error: "Bad Request" });
