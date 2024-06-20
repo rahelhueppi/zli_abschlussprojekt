@@ -91,6 +91,8 @@ app.post("/transaction", (request, response) => {
 
 //#### Get-Request to get all transactions*
 app.get("/transactions", async (request, response) => {
+  const month = request.query.month;
+  const year = request.query.year;
   try {
     //get the persons ID
     con.query(
@@ -102,7 +104,8 @@ app.get("/transactions", async (request, response) => {
         if (idPerson !== undefined) {
           //search all transactions from this person
           con.query(
-            `SELECT * FROM transaction WHERE Person_idPerson = ${idPerson}`,
+            `SELECT * FROM transaction WHERE Person_idPerson = ${idPerson} 
+            AND (date LIKE "${year}-${month}%" OR date LIKE "${year}-0${month}%")`, //2024-06-07
             (err, result) => {
               //send result/transactions
               response.status(200).send(result);
