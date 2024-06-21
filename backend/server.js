@@ -172,25 +172,39 @@ app.post("/register", async (request, response) => {
 app.post("/login", (request, response) => {
   let { loginEmail, loginPassword } = request.body;
 
-  //hash password
+  // Hash password
   loginPassword = crypto.createHash("sha1").update(loginPassword).digest("hex");
-  //get password of the email
-  con.query(
-    `SELECT password, idPerson FROM person WHERE email="${loginEmail}"`,
-    function (err, resultSelect) {
-      if (err) throw err;
-      const idPerson = resultSelect[0].idPerson;
 
-      // compare entered password with pw in db
-      if (loginPassword === `${resultSelect[0].password}`) {
-        request.session.email = loginEmail;
-        return response
-          .status(200)
-          .json({ email: request.session.email, idPerson: idPerson });
+  // Get password of the email
+  try {
+    con.query(
+      `SELECT password, idPerson FROM person WHERE email="${loginEmail}"`,
+      function (err, resultSelect) {
+        if (err) {
+          console.error(err);
+          return response.status(500).json({ error: "Database error" });
+        }
+
+        // Check if resultSelect has at least one element
+        if (resultSelect.length > 0) {
+          const idPerson = resultSelect[0].idPerson;
+
+          // Compare entered password with pw in db
+          if (loginPassword === `${resultSelect[0].password}`) {
+            request.session.email = loginEmail;
+            return response
+              .status(200)
+              .json({ email: request.session.email, idPerson: idPerson });
+          }
+        } else {
+          // Handle case where email not found
+          return response.status(404).json({ error: "Email not found" });
+        }
       }
-      return response.status(401).json({ error: "Invalid credentials" });
-    }
-  );
+    );
+  } catch {
+    return response.status(500);
+  }
 });
 
 //### verify, if a user is logged in

@@ -28,4 +28,23 @@ async function postData(formData) {
     },
     body: JSON.stringify(Object.fromEntries(formData)),
   });
+  if (response.status == 201) {
+    showSnackbar();
+  } else {
+    alert(`Error: ${response.status}`);
+  }
+}
+
+// show Snackbar
+function showSnackbar() {
+  // Get the snackbar DIV
+  var snackbar = document.getElementById("snackbarTransactionInserted");
+
+  // Add the "show" class to DIV
+  snackbar.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    snackbar.className = snackbar.className.replace("show", "");
+  }, 3000);
 }

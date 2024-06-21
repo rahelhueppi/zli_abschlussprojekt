@@ -25,9 +25,24 @@ form.addEventListener("submit", async (event) => {
 
   //### redirect to webapp, if logged in correctly
   if (response.status == 200) {
-    alert("Logininformationen korrekt");
     window.location.href = "index.html";
+  } else if (response.status == 401) {
+    showSnackbar();
   } else {
-    alert("E-Mail oder Passwort falsch");
+    alert(`Error: ${response.status}`);
   }
 });
+
+// show Snackbar
+function showSnackbar() {
+  // Get the snackbar DIV
+  var snackbar = document.getElementById("snackbarNoAccess");
+
+  // Add the "show" class to DIV
+  snackbar.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    snackbar.className = snackbar.className.replace("show", "");
+  }, 3000);
+}
