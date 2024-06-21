@@ -1,3 +1,13 @@
 article {
-  background-color: #f0f0f0;
+  background-color: #ebecee;
 }
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+

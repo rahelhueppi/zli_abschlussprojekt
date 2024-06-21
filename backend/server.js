@@ -184,6 +184,22 @@ app.get("/numberTransactions", async (request, response) => {
   }
 });
 
+//### delete a transaction
+app.delete("/transaction/:id", (request, response) => {
+  const { id } = request.params;
+  console.log(`delete ${id}`);
+  con.query(
+    `delete from transaction where idTransaction = ${id};`,
+    (err, result) => {
+      if (err) throw err;
+      console.log("1 transaction deleted");
+      response
+        .status(200)
+        .send({ message: "Transaction successfully deleted" });
+    }
+  );
+});
+
 //######### Authentication ###############
 
 //### Post-Request to save a person

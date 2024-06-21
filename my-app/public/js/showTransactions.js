@@ -84,9 +84,19 @@ function getTransactions(month) {
         // create an article-element for every transaction
         for (const i in data) {
           const article = document.createElement("article");
+          article.classList.add("article");
+          const titleElement = document.createElement("p");
+          const priceElement = document.createElement("p");
+          const dateElement = document.createElement("p");
           const br = document.createElement("br");
           const button = document.createElement("button");
-          button.innerText = "Bearbeiten";
+          button.innerText = "Löschen";
+          button.id = data[i].idTransaction;
+
+          //eventListener on click
+          button.onclick = function () {
+            deleteTransaction(data[i].idTransaction);
+          };
 
           // if it's an exprense the amount gets multiplied with -1
           let amount = data[i].amount;
@@ -98,11 +108,18 @@ function getTransactions(month) {
           let date = data[i].date;
           date = date.substr(0, 10);
 
-          // write transactions in HTML
-          article.innerText = `${data[i].title}\n ${amount} CHF\n ${date}`;
+          // put text in elements
+          titleElement.innerText = data[i].title;
+          priceElement.innerText = amount + " CHF";
+          dateElement.innerText = date;
+          // add elements to article
+          article.appendChild(titleElement);
+          article.appendChild(priceElement);
+          article.appendChild(dateElement);
+          article.appendChild(button);
+
           divTransactions.append(article);
-          divTransactions.append(button);
-          divTransactions.append(br); // Doesn't work (works without button)
+          divTransactions.append(br);
         }
       } else {
         console.log("No transactions found.");
@@ -111,4 +128,21 @@ function getTransactions(month) {
     .catch((error) => {
       console.error(error);
     });
+}
+
+async function deleteTransaction(idTransaction) {
+  console.log(`delete ${idTransaction}`);
+  try {
+    const response = await fetch(`/transaction/${idTransaction}`, {
+      method: "DELETE",
+    });
+
+    if ((response.status = 200)) {
+      console.log("Transaction deleted");
+    } else {
+      console.log(`error: response.status`);
+    }
+  } catch (error) {
+    alert(error);
+  }
 }

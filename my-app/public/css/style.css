@@ -9,7 +9,7 @@
 }
 
 nav a:hover {
-  background-color: #e7e2e2; /* Change background color on hover */
+  background-color: #dbd8d5; /* Change background color on hover */
   text-decoration: underline ;
 }
 
@@ -21,9 +21,9 @@ nav a:hover {
 }
 
 nav {
-  background-color: #f0f0f0; 
+  background-color: #F5F1ED; 
   padding: 20px;
-  border: 1px solid #ccc; /* line (separate nav from main)*/
+  border: 1px solid #A99985; /* line (separate nav from main)*/
 }
 
 nav a {
@@ -34,7 +34,7 @@ nav a {
 
 .current {
   text-decoration: underline;
-  background-color: #d7d5d5;
+  background-color: #dbd8d5;
 }
 
 
@@ -65,6 +65,8 @@ main {
 
 body{
   margin: 0;
+  background-color: white;
+  color: black;
 }
 
 #helloMessageContainer {
@@ -82,7 +84,7 @@ body{
 #divShowTransactions,
 #numberOfTransactions,
 #balance {
-  background-color: gainsboro;
+  background-color: #b9babc;
   padding: 20px; 
   height: 30vh; 
   border-radius: 8px; /*rounded corners*/
@@ -91,7 +93,7 @@ body{
   display: flex; 
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  border: 2px solid #ccc;
+  border: 1px solid #9c9797;
 }
 
 #dashboard {
