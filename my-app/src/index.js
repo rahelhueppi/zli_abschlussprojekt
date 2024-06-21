@@ -1,11 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-/*import "./index.css";*/
-import Hello from "./Hello";
+//import React from "react";
+//import ReactDOM from "react-dom/client";
+///*import "./index.css";*/
+//import Hello from "./Hello";
 /*import reportWebVitals from "./reportWebVitals";*/
 
+/*Hello World anzeigen
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Hello />);
+root.render(<Hello />);*/
+
 /*
 const transactions = ReactDOM.createRoot(
   document.getElementById("showTransactions")

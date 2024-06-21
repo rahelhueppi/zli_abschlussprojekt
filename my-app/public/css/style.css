@@ -67,6 +67,40 @@ body{
   margin: 0;
 }
 
+#helloMessageContainer {
+  text-align: center;
+}
+
 #helloMessage {
   font-size: 1.5rem;
 }
+
+
+/*### dashboard ###*/
+
+#divNewTransaction,
+#divShowTransactions,
+#numberOfTransactions,
+#balance {
+  background-color: gainsboro;
+  padding: 20px; 
+  height: 30vh; 
+  border-radius: 8px; /*rounded corners*/
+  font-size: 1.5rem;
+  /*to put the text in the center*/
+  display: flex; 
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  border: 2px solid #ccc;
+}
+
+#dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates 2 columns */
+  grid-gap: 40px; /* gap between divs*/
+  width: 60vw; 
+  margin-left: auto; /* Centers the dashboard horizontally */
+  margin-right: auto; /* Centers the dashboard horizontally */
+}
+
+
