@@ -54,7 +54,7 @@ app.post("/transaction", (request, response) => {
 
   //get the persons ID
   con.query(
-    `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+    `SELECT idPerson FROM person WHERE Name="${request.session.email}"`,
     function (err, result) {
       if (err) throw err;
       let idPersonTransaction = result[0].idPerson; // extract id out of the result
@@ -98,7 +98,7 @@ app.get("/transactions", async (request, response) => {
   try {
     //get the persons ID
     con.query(
-      `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+      `SELECT idPerson FROM person WHERE Name="${request.session.email}"`,
       function (err, result) {
         if (err) throw err;
         let idPerson = result[0].idPerson; // extract id out of the result
@@ -130,7 +130,7 @@ app.get("/balance", async (request, response) => {
   try {
     //get the persons ID
     con.query(
-      `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+      `SELECT idPerson FROM person WHERE Name="${request.session.email}"`,
       function (err, result) {
         if (err) throw err;
         let idPerson = result[0].idPerson; // extract id out of the result
@@ -160,7 +160,7 @@ app.get("/numberTransactions", async (request, response) => {
   try {
     //get the persons ID
     con.query(
-      `SELECT idPerson FROM person WHERE email="${request.session.email}"`,
+      `SELECT idPerson FROM person WHERE Name="${request.session.email}"`,
       function (err, result) {
         if (err) throw err;
         let idPerson = result[0].idPerson; // extract id out of the result
@@ -210,7 +210,7 @@ app.post("/register", async (request, response) => {
     // Check if the username is already registered
     const existingUser = await new Promise((resolve, reject) => {
       con.query(
-        `SELECT * FROM person WHERE email =?`,
+        `SELECT * FROM person WHERE Name =?`,
         [registerEmail],
         (err, result) => {
           if (err) reject(err);
@@ -230,7 +230,7 @@ app.post("/register", async (request, response) => {
         .digest("hex");
 
       // Insert data into database
-      var sql = `INSERT INTO person (email, password) 
+      var sql = `INSERT INTO person (Name, password) 
     VALUES ('${registerEmail}', '${hashPassword}')`;
       con.query(sql, function (err, result) {
         if (err) throw err;
@@ -255,7 +255,7 @@ app.post("/login", (request, response) => {
   // Get password of the email
   try {
     con.query(
-      `SELECT password, idPerson FROM person WHERE email="${loginEmail}"`,
+      `SELECT password, idPerson FROM person WHERE Name="${loginEmail}"`,
       function (err, resultSelect) {
         if (err) {
           console.error(err);
@@ -277,7 +277,7 @@ app.post("/login", (request, response) => {
           }
         } else {
           // Handle case where email not found
-          return response.status(404).json({ error: "Email not found" });
+          return response.status(404).json({ error: "Username not found" });
         }
       }
     );
