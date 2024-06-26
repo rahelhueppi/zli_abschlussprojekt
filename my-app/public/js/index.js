@@ -1,5 +1,14 @@
-//If you're logged in, you stay on index.html
-//or else you will be redirected to login.html
+/*
+# author: Rahel Hüppi
+# version: 1.0
+# date: 26.06.2024
+# description: Requests for index.html
+# verify, get number of transactions, get balance
+*/
+
+// If you're logged in, you stay on index.html
+// or else you will be redirected to login.html
+
 fetch(`/verify`, {
   method: "GET",
 })
@@ -7,6 +16,10 @@ fetch(`/verify`, {
     /*alert(response.status);*/
     if (response.status == 401) {
       window.location.href = "login.html";
+    } else if (response.status == 200) {
+      //send other requests when user is logged in
+      getNumberTransactions();
+      getBalance();
     }
     return response.text(); //get body as string
   })
@@ -23,59 +36,63 @@ fetch(`/verify`, {
   });
 
 //### get the number of Transactions of a person
-fetch(`/numberTransactions`, {
-  method: "GET",
-})
-  .then((response) => {
-    return response.text();
+function getNumberTransactions() {
+  fetch(`/numberTransactions`, {
+    method: "GET",
   })
-  .then((body) => {
-    const data = JSON.parse(body);
+    .then((response) => {
+      return response.text();
+    })
+    .then((body) => {
+      const data = JSON.parse(body);
 
-    const numberOfTransactions = document.getElementById(
-      "numberOfTransactions"
-    );
-    numberOfTransactions.innerText = `Bisher haben Sie ${data[0].numberTransactions} Transaktionen durchgeführt.`;
-  });
-
+      const numberOfTransactions = document.getElementById(
+        "numberOfTransactions"
+      );
+      numberOfTransactions.innerText = `Bisher haben Sie ${data[0].numberTransactions} Transaktionen durchgeführt.`;
+    });
+}
 //### get the saldo of a person
-fetch(`/balance`, {
-  method: "GET",
-})
-  .then((response) => {
-    // Use.json() to parse the response body as JSON
-    return response.json();
+function getBalance() {
+  fetch(`/balance`, {
+    method: "GET",
   })
-  .then((data) => {
-    // data contains parsed json
-    let balance = 0;
-    if (data.length > 0) {
-      // create an article-element for every transaction
-      for (const i in data) {
-        // if it's an exprense the amount gets multiplied with -1
-        let amount = data[i].amount;
-        if (data[i].transactionType == "expense") {
-          amount = amount * -1;
+    .then((response) => {
+      // Use.json() to parse the response body as JSON
+      return response.json();
+    })
+    .then((data) => {
+      // data contains parsed json
+      let balance = 0;
+      if (data.length > 0) {
+        // create an article-element for every transaction
+        for (const i in data) {
+          // if it's an exprense the amount gets multiplied with -1
+          let amount = data[i].amount;
+          if (data[i].transactionType == "expense") {
+            amount = amount * -1;
+          }
+          // update amount
+          console.log(amount);
+          balance += amount;
+          balance = Math.round(balance * 20) / 20;
+          console.log(balance);
         }
-        console.log(amount);
-        balance += amount;
-        balance = Math.round(balance * 20) / 20;
-        console.log(balance);
+
+        const divBalance = document.getElementById("balance");
+
+        divBalance.innerHTML = `Ihr aktueller Saldo ist: ${balance} CHF`;
+      } else {
+        console.log("No transactions found.");
+        const divBalance = document.getElementById("balance");
+
+        divBalance.innerHTML = `Ihr aktueller Saldo ist: 0.00 CHF`;
       }
-
-      const divBalance = document.getElementById("balance");
-
-      divBalance.innerHTML = `Ihr aktueller Saldo ist: ${balance} CHF`;
-    } else {
-      console.log("No transactions found.");
-      const divBalance = document.getElementById("balance");
-
-      divBalance.innerHTML = `Ihr aktueller Saldo ist: 0.00 CHF`;
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 //go to newTransaction.html on click on this tile
 document.addEventListener("DOMContentLoaded", function () {

@@ -1,0 +1,50 @@
+/*
+# author: Rahel Hüppi
+# version: 1.0
+# date: 26.06.2024
+# description: CSS for the two Snackbars
+*/
+
+/* snackbar */
+#snackbarNoAccess, #snackbarTransactionInserted {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #4f4e4e; 
+  color: #fff;
+  text-align: center; /* Centered text */
+  border-radius: 8px; /* Rounded borders */
+  padding: 16px; 
+  position: fixed; /* Sit on top of screen */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show snackbar when class added */
+#snackbarNoAccess.show {
+  visibility: visible; /* Show snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  Delay fade out process for 2.5 seconds */
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Show snackbar when class added */
+#snackbarTransactionInserted.show {
+  visibility: visible; /* Show snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  Delay fade out process for 2.5 seconds */
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/* Animations to fade the snackbar in and out */
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

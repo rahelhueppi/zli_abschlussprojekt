@@ -26,7 +26,7 @@ form.addEventListener("submit", async (event) => {
   //### redirect to webapp, if logged in correctly
   if (response.status == 200) {
     window.location.href = "index.html";
-  } else if (response.status == 401) {
+  } else if (response.status == 401 || response.status == 404) {
     showSnackbar();
   } else {
     alert(`Error: ${response.status}`);

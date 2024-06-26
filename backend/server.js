@@ -272,6 +272,8 @@ app.post("/login", (request, response) => {
             return response
               .status(200)
               .json({ email: request.session.email, idPerson: idPerson });
+          } else {
+            response.status(401).json({ error: "Unauthorized" });
           }
         } else {
           // Handle case where email not found
