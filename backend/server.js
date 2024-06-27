@@ -18,7 +18,8 @@ const dashboardRoutes = require("./dashboard");
 //### Middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-//JSON middleware enables sending JSON data to endpoints, making them accessible as js objects.
+// JSON middleware enables sending JSON data to endpoints,
+// making them accessible as js objects.
 app.use(express.json());
 app.use(
   session({

@@ -20,7 +20,6 @@ form.addEventListener("submit", (event) => {
 //### Function to make POST-Request
 async function postData(formData) {
   //send a POST-Request to the backend
-  //`http://localhost:3001/transaction`
   const response = await fetch(`/transactions/transaction`, {
     method: "POST",
     headers: {

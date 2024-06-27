@@ -12,11 +12,6 @@ form.addEventListener("submit", async (event) => {
   //const formData = new FormData(form);
 
   checkPasswords();
-
-  // Call function to make a POST-Request
-  /*const response = await postData(formData);
-
-  checkEmail(response);*/
 });
 
 //### Function to make POST-Request
@@ -76,12 +71,7 @@ async function checkEmail(formData) {
     document
       .querySelector('input[name="registerEmail"]')
       .addEventListener("change", async () => {
-        // Create a new FormData instance and send a POST request
-        /*const newFormData = new FormData(form);
-          const response = await postData(newFormData);*/
-
-        // Check the email every time it changes
-        //submit(newForm); //eventListener in function submit
+        // Check every time the username changes
         checkPasswords();
       });
   } else {

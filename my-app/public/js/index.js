@@ -13,7 +13,6 @@ fetch(`/auth/verify`, {
   method: "GET",
 })
   .then((response) => {
-    /*alert(response.status);*/
     if (response.status == 401) {
       window.location.href = "login.html";
     } else if (response.status == 200 || response.status == 304) {

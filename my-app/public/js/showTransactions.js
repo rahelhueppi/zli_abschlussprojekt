@@ -130,6 +130,7 @@ function getTransactions(month) {
     });
 }
 
+// function to delete a transaction
 async function deleteTransaction(idTransaction) {
   console.log(`delete ${idTransaction}`);
   try {
