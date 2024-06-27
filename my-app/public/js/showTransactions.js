@@ -104,9 +104,24 @@ function getTransactions(month) {
             amount = amount * -1;
           }
 
-          // shorten the date, so its only the day
+          // function to format date
+          function formatDate(date) {
+            var d = new Date(date),
+              month = "" + (d.getMonth() + 1),
+              day = "" + d.getDate(),
+              year = d.getFullYear();
+
+            if (month.length < 2) month = "0" + month;
+            if (day.length < 2) day = "0" + day;
+
+            return [year, month, day].join("-");
+          }
+
+          // make a date-object with the date (or else the date is one day behind)
           let date = data[i].date;
-          date = date.substr(0, 10);
+          date = new Date(date);
+          // format the date with the function
+          date = formatDate(date);
 
           // put text in elements
           titleElement.innerText = data[i].title;
