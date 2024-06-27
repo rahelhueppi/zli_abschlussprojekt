@@ -22,7 +22,7 @@ form.addEventListener("submit", async (event) => {
 //### Function to make POST-Request
 async function postData(formData) {
   // Send a POST-Request to the backend
-  const response = await fetch(`/register`, {
+  const response = await fetch(`/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

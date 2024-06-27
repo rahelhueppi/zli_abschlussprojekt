@@ -69,7 +69,7 @@ divCurrentMonth.addEventListener("click", () => {
 
 // function for get all Transaction (of a person in a month)
 function getTransactions(month) {
-  fetch(`/transactions?month=${month + 1}&year=${year}`, {
+  fetch(`/transactions/transactions?month=${month + 1}&year=${year}`, {
     method: "GET",
   })
     .then((response) => {

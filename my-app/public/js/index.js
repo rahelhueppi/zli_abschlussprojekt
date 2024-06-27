@@ -9,17 +9,19 @@
 // If you're logged in, you stay on index.html
 // or else you will be redirected to login.html
 
-fetch(`/verify`, {
+fetch(`/auth/verify`, {
   method: "GET",
 })
   .then((response) => {
     /*alert(response.status);*/
     if (response.status == 401) {
       window.location.href = "login.html";
-    } else if (response.status == 200) {
+    } else if (response.status == 200 || response.status == 304) {
       //send other requests when user is logged in
       getNumberTransactions();
       getBalance();
+    } else {
+      alert(response.status);
     }
     return response.text(); //get body as string
   })
@@ -37,7 +39,7 @@ fetch(`/verify`, {
 
 //### get the number of Transactions of a person
 function getNumberTransactions() {
-  fetch(`/numberTransactions`, {
+  fetch(`/dashboard/numberTransactions`, {
     method: "GET",
   })
     .then((response) => {
@@ -54,7 +56,7 @@ function getNumberTransactions() {
 }
 //### get the saldo of a person
 function getBalance() {
-  fetch(`/balance`, {
+  fetch(`/dashboard/balance`, {
     method: "GET",
   })
     .then((response) => {

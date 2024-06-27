@@ -10,7 +10,7 @@
     <script>
       //If you're logged in, you stay on index.html
       //or else you will be redirected to login.html
-      fetch(`/verify`, {
+      fetch(`/auth/verify`, {
         method: "GET",
       })
         .then((response) => {
