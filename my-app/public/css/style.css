@@ -1,7 +1,7 @@
 /*
 # author: Rahel Hüppi
 # version: 1.0
-# date: 26.06.2024
+# date: 28.06.2024
 # description: CSS for Navigation and Index.html
 #
 # I often had help from phind.com in my CSS-Files
@@ -48,7 +48,7 @@ nav a {
 
 /*navigation for months*/
 #navMonths {
-  background-color: #fbfbfb; 
+  background-color: white; 
   padding: 20px;
   border: 1px solid #ffffff; /* line (separate nav from main)*/
 }
@@ -65,6 +65,13 @@ nav a {
 
 
 /*######## main #######*/
+
+/*font*/
+html {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
 main {
   flex-grow: 1;
