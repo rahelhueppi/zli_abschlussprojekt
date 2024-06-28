@@ -9,7 +9,6 @@ const buttonSubmit = document.getElementById("submit");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  //const formData = new FormData(form);
 
   checkPasswords();
 });

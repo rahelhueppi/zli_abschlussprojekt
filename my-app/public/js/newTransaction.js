@@ -34,7 +34,7 @@ async function postData(formData) {
   }
 }
 
-// show Snackbar
+// show snackbar
 function showSnackbar() {
   // Get the snackbar DIV
   var snackbar = document.getElementById("snackbarTransactionInserted");

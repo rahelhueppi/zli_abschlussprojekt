@@ -7,7 +7,7 @@
 
 const express = require("express"); // npm install express
 const app = express();
-const cors = require("cors"); //Um CORS-Probleme zu verhindern
+const cors = require("cors"); //to prevent CORS-problems
 const session = require("express-session");
 
 //import routes

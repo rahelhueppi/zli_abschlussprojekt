@@ -31,8 +31,6 @@
 /* Show snackbar when class added */
 #snackbarTransactionInserted.show {
   visibility: visible; /* Show snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  Delay fade out process for 2.5 seconds */
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 

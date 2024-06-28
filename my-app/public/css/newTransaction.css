@@ -15,10 +15,9 @@ main {
 
 .divForm {
   width: 45%; /* with of the form-container */
-  max-width: 600px; 
-  /*background-color: white; /* Weißer Hintergrund für das Formular */
-  padding: 30px; /* Abstand innerhalb des Formularcontainers */
-  box-shadow: 0 00 20px rgba(0,0,0,0.1); /* Umriss um das Formular */
+  max-width: 600px;
+  padding: 30px; /* Spacing within the form container */
+  box-shadow: 0 00 20px rgba(0,0,0,0.1); /* Outline around the form */
 }
 
 /*font*/
