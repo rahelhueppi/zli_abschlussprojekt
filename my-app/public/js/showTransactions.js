@@ -149,7 +149,7 @@ function getTransactions(month) {
 async function deleteTransaction(idTransaction) {
   console.log(`delete ${idTransaction}`);
   try {
-    const response = await fetch(`/transaction/${idTransaction}`, {
+    const response = await fetch(`/transactions/transaction/${idTransaction}`, {
       method: "DELETE",
     });
 
